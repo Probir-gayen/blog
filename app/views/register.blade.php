@@ -1,10 +1,20 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Registration Page</title>
-</head>	
-<body>
+@extends('layouts.index')
+
+
+@section('head')
+	@parent
+
+	<title>Blog</title>
+
+@stop
+@section('content')
+	
+	@if(Session::has('success'))
+		<div class="alert alert-success">{{ Session::get('success') }}</div>
+	@elseif(Session::has('fail'))
+		<div class="alert alert-danger">{{ Session::get('fail') }}</div>
+	@endif
+
 	<form action="register/create" method="post">
 		<div>
 			Email-id<input type="email" name="email" required>
@@ -82,6 +92,4 @@
 			<input type="submit" value="Submit">
 		</div>
 	</form>
-</body>
-</html>
-
+@stop

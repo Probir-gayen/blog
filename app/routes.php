@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function()
+Route::get('home', function()
 {
-	return View::make('hello');
+	return View::make('home');
 });
 
 Route::get('login', function()
@@ -21,6 +21,27 @@ Route::get('login', function()
 	return View::make('login');
 });
 
+Route::get('profile', function()
+{
+	return View::make('profile');
+})->before('Auth');
+
+Route::get('blog', function()
+{
+	return View::make('blog');
+});
+
 
 
 Route::controller('register','RegisterController');
+
+Route::post('login', 'UserController@postLogin');
+Route::get('show', 'UserController@getLogin');
+
+Route::get('logout', 'UserController@getLogout');
+
+Route::controller('create','BlogController');
+
+Route::post('blog','BlogController@postBlog');
+
+Route::controller('show/{$url}','postsController');

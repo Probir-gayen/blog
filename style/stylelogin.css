@@ -1,0 +1,6 @@
+#header
+{display:block;position:fixed;top:0%;height:15%;width:100%;background: #333333 url(../images/blue.jpg);}
+h1
+{color:white;text-shadow:2px 1px #000; position:fixed;top:5%;font-size:25px;}
+#footer
+{display:block;color:#fff;position:fixed;top:88%;width:100%;height:15%;background:  url(../images/blue.jpg);}
