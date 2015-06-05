@@ -9,9 +9,72 @@ class postsController extends \BaseController {
 	 */
 	public function getIndex($url)
 	{
-		return Redirect::to('posts');
+		
+		$bid= Blog::where('url', '=', $url)->first();
+		$pos=Post::where('blog_id',"=", $bid['bid'])->get();
+		$pos1=Post::where('blog_id','=',$bid['bid'])->first();
+		$al = array('url' => $url ,
+					'bid' => $bid['bid'] );
+		$com = Comment::where('post_id','=', $pos1['pid'])->get();
+		// return $com;
+		return View::make('postProfile')->with('pos',$pos)->with('al',$al)->with('com',$com);
 	}
 
+	public function getPosts($url , $bid)
+	{
+		
+		// return "kgkg";
+		$bid= Blog::where('url', '=', $url)->first();
+		// $al = array('url' => $url ,
+		// 			'bid' => $bid->bid );	
+		return View::make('posts')->with('url',$url);
+	}
+	public function postPosts($url )
+	{
+		// return "sdsdsds";
+		$validate = Validator::make(Input::all(), array(
+				'title' => 'required',	
+				'desc' => 'required',
+				'category' => 'required',
+				'tag' => 'required',
+			));
+
+		if($validate->fails())
+		{
+			return Redirect::to('post/')->withErrors($validate)->withInput();
+		}
+		else
+		{
+			$pos = new Post();
+			$bid = Blog::where('url', '=', $url)->first();
+
+			$pos->blog_id = $bid['bid']; 
+			$pos->titel = Input::get('title');
+			$pos->description =Input::get('desc'); 
+			$pos->category =Input::get('category'); 
+			$pos->tag =Input::get('tag'); 
+			if($pos->save())
+			{
+				return Redirect::to('show/'.$url);
+			}
+			else
+			{
+				return "error";
+			}
+		}
+	}
+
+	public function postDelete($url , $pid)
+	{
+		// return "gjhgkjj";
+		$pos= Post::where('pid','=',$pid)->delete();
+		
+		$com=Comment::where('post_id','=',$pid)->delete();
+		//$com->delete();
+
+		return Redirect::to('show/'.$url);
+
+	}
 
 	/**
 	 * Show the form for creating a new resource.

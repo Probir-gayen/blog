@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 
-@section('head')
+@section('head') 
 	@parent
 
 	<title>Blog</title>

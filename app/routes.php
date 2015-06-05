@@ -31,6 +31,17 @@ Route::get('blog', function()
 	return View::make('blog');
 });
 
+// Route::get('posts', function()
+// {
+// 	return View::make('posts');
+// });
+
+Route::get('postProfile', function()
+{
+	return View::make('postProfile');
+});
+
+
 
 
 Route::controller('register','RegisterController');
@@ -44,4 +55,12 @@ Route::controller('create','BlogController');
 
 Route::post('blog','BlogController@postBlog');
 
-Route::controller('show/{$url}','postsController');
+Route::get('show/{url}',array('uses'=>'postsController@getIndex','as' => 'post2'));
+
+Route::post('posts/{url}',array('uses'=>'postsController@postPosts', 'as' => 'posts1'));
+
+Route::get('posts/{url}/{bid}',array('uses'=>'PostsController@getPosts', 'as' => 'posts'));
+
+Route::post('comment/{url}/{pid}',array('uses'=>'commentController@postComment', 'as' => 'comment'));
+
+Route::post('delete/{url}/{bid}',array('uses'=>'PostsController@postDelete', 'as' => 'delete'));
