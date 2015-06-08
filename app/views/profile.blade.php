@@ -46,6 +46,12 @@
 							With Id: <lable>{{ $blog->bid }}</lable></br>
 							Created at: <lable>{{ $blog->created_at }} </lable></br>
 							Updated at:<lable> {{ $blog->updated_at }} </lable>
+
+							<div style="float:right;">
+								<form class="" action="{{ URL::route('delete',$blog['bid']) }}" method="post">
+									<button class="btn-primary">Delete Blog</button>
+								</form>
+							</div>
 							====================================</br></br>
 						@endforeach
 					</ul>

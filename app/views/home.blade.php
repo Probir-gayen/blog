@@ -9,14 +9,23 @@
 @stop
 
 @section('content')
+	
+	<div class="header row" style="background-color:#3a5795;color:#fff">
+		<div class="col-5"></div>
+		<div class="col-2" style="margin-bottom:2px;">
+			
+				BLOG
+		</div>
+		<div class="col-5"></div>		
+	</div>
 
-	<div class="navbar-collapse collapse navbar-responsive-collapse">
-		<ul class="nav navbar-nav">
+	<div  style="margin-top:100px;">
+		<ul >
 			<li><a href="{{ URL::to('login') }}">Login</a></li>
 		</ul>
-		<ul class="nav navbar-nav navbar-right">
+		<ul >
 			
-				<li><a href="{{ URL::to('register') }}">Register</a></li>
+			<li><a href="{{ URL::to('register') }}">Register</a></li>
 			
 		</ul>
 	</div>

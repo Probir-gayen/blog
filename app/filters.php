@@ -43,7 +43,13 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			if(Session::has('email')){
+
+			}
+			else
+			{
+				return Redirect::guest('login');
+			}
 		}
 	}
 });

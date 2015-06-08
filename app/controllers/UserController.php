@@ -24,6 +24,7 @@ class UserController extends BaseController
 			{
 
 				Session::put('email',$email);
+				
 				return Redirect::to('show');
 				
 			}	
@@ -36,6 +37,7 @@ class UserController extends BaseController
 
 	 public function getLogin()
 	{
+
 		$email=Session::get('email');
 		$uid= Login::where('email', '=', $email)->first();
 		$blogs=Blog::where('user_id',"=", $uid->uid)->get();
@@ -47,7 +49,44 @@ class UserController extends BaseController
 	{
 		Session::flush();
 		Auth::logout();
-		return Redirect::to('login');
+		return Redirect::to('home');
+		
+	}
+
+	public function postDeleteBlog($bid)
+	{
+		
+
+		$pos= Post::where('blog_id','=',$bid)->first();
+		if($pos != null)
+		{
+			$com=Comment::where('post_id','=',$pos->pid)->delete();
+			$pos= Post::where('pid','=',$pos->pid)->delete();
+		}
+		$blog=Blog::where('bid','=',$bid)->delete();
+		
+
+		return Redirect::to('show');
+
+	}
+
+
+	public function postAjaxLogin()
+	{
+		
+		$cc = Input::get('val');
+		$log= Login::all();
+		foreach ($log as $key => $value)
+		 {
+			if($cc != $value->email)
+			{
+				return 'invalid email';
+			}
+			else
+			{
+				return 'correct';
+			}
+		}
 		
 	}
 }

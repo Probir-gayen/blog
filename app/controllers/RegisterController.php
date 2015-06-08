@@ -75,5 +75,43 @@
 			// die(var_dump($email));
 
 		}
+
+		public function postAjaxRegister()
+		{
+			
+			$email = Input::get('val');
+			$name = Input::get('val');
+			$opt = Input::get('opt');
+			if($opt == "email")
+			{
+				$log= Login::all();
+				foreach ($log as $key => $value)
+				 {
+					if($email == $value->email)
+					{
+						return 'Email Already Exist';
+					}
+					else
+					{
+						return 'Accepted Email';
+					}
+				}
+			}
+			else if($opt=="fname")
+			{
+				$det= UserDetails::all();
+				foreach ($det as $key => $value)
+				 {
+					if($name == $value->first_name)
+					{
+						return 'Name Already Exist';
+					}
+					else
+					{
+						return 'Accepted Name';
+					}
+				}
+			}	
+		}
 	}
 ?>

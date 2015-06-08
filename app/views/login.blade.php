@@ -6,6 +6,8 @@
 	@parent
 
 	<title>Blog</title>
+	{{ HTML::script('js/login.js') }}
+
 
 @stop
 @section('content')
@@ -21,8 +23,8 @@
 	    <form role="form" class="form_box" id="loginform" action="login" method="post">
 	        <div class="form-group">
 		        <label id="label1">Email</label>
-		        <input type="email" class="form-control" id="email_uname" name="email" placeholder="Email" required="required">
-		        
+		        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="required">
+		        <div id="semail"></div>
 				
 		        <label id="label2">Password</label>
 		        <input type="password" class="form-control" id="password" name="password" placeholder="Password"  required="required">

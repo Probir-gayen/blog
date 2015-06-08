@@ -41,6 +41,15 @@ class commentController extends \BaseController {
 		}
 	}
 
+	public function postDelete($url , $cid)
+	{
+		
+		
+		$com=Comment::where('cid','=',$cid)->delete();
+		return Redirect::to('show/'.$url);
+
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *

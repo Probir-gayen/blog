@@ -12,11 +12,14 @@ class postsController extends \BaseController {
 		
 		$bid= Blog::where('url', '=', $url)->first();
 		$pos=Post::where('blog_id',"=", $bid['bid'])->get();
+		$det= UserDetails::where('user_id',"=", $bid['user_id'])->first();
 		$pos1=Post::where('blog_id','=',$bid['bid'])->first();
 		$al = array('url' => $url ,
-					'bid' => $bid['bid'] );
-		$com = Comment::where('post_id','=', $pos1['pid'])->get();
+					'bid' => $bid['bid'] , 'fname' => $det['first_name'] ,'lname' => $det['last_name'] );
+		// $com = Comment::where('post_id','=', $pos1['pid'])->get();
 		// return $com;
+
+		$com = Comment::all();
 		return View::make('postProfile')->with('pos',$pos)->with('al',$al)->with('com',$com);
 	}
 
@@ -50,9 +53,18 @@ class postsController extends \BaseController {
 
 			$pos->blog_id = $bid['bid']; 
 			$pos->titel = Input::get('title');
-			$pos->description =Input::get('desc'); 
-			$pos->category =Input::get('category'); 
-			$pos->tag =Input::get('tag'); 
+			$pos->description =Input::get('desc');
+			
+			if(Input::get('category') != "Others") 
+			{
+				$pos->category =Input::get('category'); 
+				$pos->tag =Input::get('tag'); 
+			}
+			else
+			{
+				$pos->category =Input::get('category1'); 
+				$pos->tag =Input::get('tag1'); 
+			}
 			if($pos->save())
 			{
 				return Redirect::to('show/'.$url);

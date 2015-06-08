@@ -21,10 +21,10 @@ Route::get('login', function()
 	return View::make('login');
 });
 
-Route::get('profile', function()
-{
-	return View::make('profile');
-})->before('Auth');
+// Route::get('profile', function()
+// {
+// 	return View::make('profile');
+// })->before('Auth');
 
 Route::get('blog', function()
 {
@@ -46,8 +46,11 @@ Route::get('postProfile', function()
 
 Route::controller('register','RegisterController');
 
+Route::post('login/ajax','registerController@postAjaxRegister');
+
 Route::post('login', 'UserController@postLogin');
-Route::get('show', 'UserController@getLogin');
+
+Route::get('show', 'UserController@getLogin')->before('auth');
 
 Route::get('logout', 'UserController@getLogout');
 
@@ -63,4 +66,9 @@ Route::get('posts/{url}/{bid}',array('uses'=>'PostsController@getPosts', 'as' =>
 
 Route::post('comment/{url}/{pid}',array('uses'=>'commentController@postComment', 'as' => 'comment'));
 
+Route::post('delete/{bid}',array('uses'=>'userController@postDeleteBlog', 'as' => 'delete'));
+
 Route::post('delete/{url}/{bid}',array('uses'=>'PostsController@postDelete', 'as' => 'delete'));
+
+Route::post('deleteCom/{url}/{cid}',array('uses'=>'commentController@postDelete', 'as' => 'deleteCom'));
+
