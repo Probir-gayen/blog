@@ -5,7 +5,7 @@
 	@parent
 
 	<title>Blog</title>
-	{{ HTML::script('js/register.js') }}
+	{{ HTML::script('js/control.js') }}
 	
 @stop
 
@@ -54,7 +54,7 @@
 						</select>
 					<label id="catop"></label>
 					</label>
-					<label>tag</label>
+					<label>Tag</label>
 					<label><div ></div>
 						<select id="tag" name="tag"></select>
 						

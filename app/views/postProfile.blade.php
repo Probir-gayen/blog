@@ -57,7 +57,7 @@
 								Title: <a href=""><lable>{{ $poss->titel }}</lable></a>
 								Description: <lable>{{ $poss->description }}</lable></br>
 								The Category is: <lable>{{ $poss->category }}</lable></br>
-								The Tage is: <lable>{{ $poss->category }}</lable></br>
+								The Tage is: <lable>{{ $poss->tag }}</lable></br>
 								Created at: <lable>{{ $poss->created_at }} </lable></br>
 								Updated at:<lable> {{ $poss->updated_at }} </lable>
 								

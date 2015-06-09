@@ -55,6 +55,21 @@ Route::filter('auth', function()
 });
 
 
+Route::filter('loged', function()
+{
+
+	if (Session::has('email'))
+	{
+		
+		return Redirect::to('show');
+	}
+	else
+	{
+		
+	}
+});
+
+
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();
@@ -94,3 +109,5 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+

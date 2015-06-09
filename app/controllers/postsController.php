@@ -54,16 +54,23 @@ class postsController extends \BaseController {
 			$pos->blog_id = $bid['bid']; 
 			$pos->titel = Input::get('title');
 			$pos->description =Input::get('desc');
-			
-			if(Input::get('category') != "Others") 
+			//dd(Input::get('tag'));
+			// dd(Input::get('categoryop'));
+			// dd(Input::get('tagop'));
+			if(Input::get('category') != "Others" && Input::get('tag') != "Others") 
 			{
 				$pos->category =Input::get('category'); 
 				$pos->tag =Input::get('tag'); 
 			}
-			else
+			else if(Input::get('category') != "Others" && Input::get('tag') == "Others") 
 			{
-				$pos->category =Input::get('category1'); 
-				$pos->tag =Input::get('tag1'); 
+				$pos->category =Input::get('category'); 
+				$pos->tag =Input::get('tagop'); 
+			}
+			else if(Input::get('category') == "Others" && Input::get('tag') == "Others")
+			{
+				$pos->category =Input::get('categoryop'); 
+				$pos->tag =Input::get('tagop'); 
 			}
 			if($pos->save())
 			{

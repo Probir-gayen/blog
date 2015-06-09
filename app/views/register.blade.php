@@ -5,7 +5,7 @@
 	@parent
 
 	<title>Blog</title>
-	{{ HTML::script('js/register.js') }}
+	{{ HTML::script('js/control.js') }}
 
 @stop
 @section('content')

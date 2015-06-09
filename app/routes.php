@@ -19,7 +19,7 @@ Route::get('home', function()
 Route::get('login', function()
 {
 	return View::make('login');
-});
+})->before('loged');
 
 // Route::get('profile', function()
 // {
