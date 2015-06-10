@@ -12,15 +12,19 @@ class postsController extends \BaseController {
 		
 		$bid= Blog::where('url', '=', $url)->first();
 		$pos=Post::where('blog_id',"=", $bid['bid'])->get();
+		$log=Login::where('uid','=',$bid['user_id'])->first();
+		$log1=Login::where('email','=',Session::get('email'))->first();
 		$det= UserDetails::where('user_id',"=", $bid['user_id'])->first();
 		$pos1=Post::where('blog_id','=',$bid['bid'])->first();
+		$like=Like::all();
+		// $likeCount=Like::where('post_id','=',$pos1['pid'])->count();
 		$al = array('url' => $url ,
-					'bid' => $bid['bid'] , 'fname' => $det['first_name'] ,'lname' => $det['last_name'] );
+					'bid' => $bid['bid'] , 'fname' => $det['first_name'] ,'lname' => $det['last_name'],'email'=>$log['email'] ,
+					 'uid' =>$log1['uid'] );
 		// $com = Comment::where('post_id','=', $pos1['pid'])->get();
 		// return $com;
-
 		$com = Comment::all();
-		return View::make('postProfile')->with('pos',$pos)->with('al',$al)->with('com',$com);
+		return View::make('postProfile')->with('pos',$pos)->with('al',$al)->with('com',$com)->with('like',$like);
 	}
 
 	public function getPosts($url , $bid)
@@ -83,6 +87,27 @@ class postsController extends \BaseController {
 		}
 	}
 
+	public function postLike($url , $pid)
+	{
+		$email=Session::get('email');
+		$login=Login::where('email','=',$email)->first();
+
+		$like = new Like();
+		$like->user_id=$login->uid;
+		$like->post_id = $pid;
+		$like->like = $like->like+1;
+		if($like->save())
+		{
+			return Redirect::to('show/'.$url);
+		}
+		else
+		{
+			dd("not saved");
+		}
+		
+		
+	}
+
 	public function postDelete($url , $pid)
 	{
 		// return "gjhgkjj";
@@ -90,7 +115,7 @@ class postsController extends \BaseController {
 		
 		$com=Comment::where('post_id','=',$pid)->delete();
 		//$com->delete();
-
+		$like=Like::where('post_id','=',$pid)->delete();
 		return Redirect::to('show/'.$url);
 
 	}

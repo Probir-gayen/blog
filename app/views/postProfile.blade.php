@@ -21,7 +21,7 @@
 
 	<div class="header row" style="background-color:#3a5795;color:#fff;">
 		<div class="col-10" style="">
-			@if(Session::has('email'))
+			@if(Session::get('email') == $al['email'])
 				Welcome {{ Session::get('email') }}
 			@else
 				Welcome To {{ $al['fname'] }} {{ $al['lname'] }}'s Post
@@ -39,7 +39,7 @@
 				
 			</div>
 				<div class="leftside " style="float:left;height:700px; width:200px; ">
-					@if(Session::has('email'))
+					@if(Session::get('email') == $al['email'])
 						
 						<p><a href="{{ URL::route('posts',array($al['url'], $al['bid'])) }}" style="color:#333;">New Post</a></p>
 						
@@ -64,8 +64,51 @@
 								<div>
 									<span  style="float:left;"><a href="#" class="com" >Comment</a></span>
 									<span style="float:right;">
-										<form class="form-control" action="{{ URL::route('delete',array($al['url'], $poss['pid'])) }}" method="post">
+										
+										@if(count($like) > 0)<?php $i=0; ?>
+												@foreach($like as $likes)
+													@if( $likes['post_id'] == $poss['pid'])
+														
+														<?php $i++; ?>
+														
+													@endif 
+												@endforeach <a href=""> {{ $i }}Likes </a><?php $i=0; ?>
+											@if(Session::has('email'))	<?php $j=0; ?>
+												@foreach($like as $likes)
+													 	
+													 	@if($j==2)
+															<?php break; ?>
+														
+														@elseif($al['uid'] == $likes['user_id'] ) 
+														
+															@if( $likes['post_id'] == $poss['pid'])
+																<?php $j=2; ?>
+																<?php break; ?>
+															@else
+																<?php $j=1; ?>
+															@endif
+															
+														
+														@else
+															<?php $j=1; ?>
+														@endif
+														
+												@endforeach
+												@if($j == 1)
+														<div><form action="{{ URL::route('like',array($al['url'], $poss['pid'])) }}" method="post">
+														<button type="submit">LIKES</button>
+														</form> </div>
+												@endif
+											@endif	
+										@elseif(count($like)==0)
 											@if(Session::has('email'))
+												<div><form action="{{ URL::route('like',array($al['url'], $poss['pid'])) }}" method="post">
+														<button type="submit">LIKES</button>
+													</form> </div>
+											@endif
+										@endif
+										<form class="form-control" action="{{ URL::route('delete',array($al['url'],$poss['pid'])) }}" method="post">
+											@if(Session::get('email') == $al['email'])
 												<button class="btn-primary">Delete Post</button>
 											@endif
 										</form>
@@ -83,8 +126,7 @@
 																{{ $coms['comment'] }}
 															</div></br>
 															AT:{{ $coms['created_at']}} 
-															
-															@if(Session::has('email'))
+															@if(Session::get('email') == $al['email'])
 																<div style="float:right;">
 																	<form action="{{ URL::route('deleteCom',array($al['url'], $coms['cid'])) }}" method="post">
 																		<button class="btn ">Delete Comment</button>

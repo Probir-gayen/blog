@@ -61,6 +61,7 @@ class UserController extends BaseController
 		if($pos != null)
 		{
 			$com=Comment::where('post_id','=',$pos->pid)->delete();
+			$like= Like::where('post_id','=',$pos->pid)->delete();
 			$pos= Post::where('pid','=',$pos->pid)->delete();
 		}
 		$blog=Blog::where('bid','=',$bid)->delete();
@@ -71,23 +72,5 @@ class UserController extends BaseController
 	}
 
 
-	public function postAjaxLogin()
-	{
-		
-		$cc = Input::get('val');
-		$log= Login::all();
-		foreach ($log as $key => $value)
-		 {
-			if($cc != $value->email)
-			{
-				return 'invalid email';
-			}
-			else
-			{
-				return 'correct';
-			}
-		}
-		
-	}
 }
 

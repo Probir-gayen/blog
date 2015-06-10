@@ -72,3 +72,4 @@ Route::post('delete/{url}/{bid}',array('uses'=>'PostsController@postDelete', 'as
 
 Route::post('deleteCom/{url}/{cid}',array('uses'=>'commentController@postDelete', 'as' => 'deleteCom'));
 
+Route::post('like/{url}/{pid}',array('uses'=>'PostsController@postLike', 'as' => 'like'));
