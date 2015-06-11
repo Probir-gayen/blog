@@ -1,4 +1,6 @@
 $("document").ready(function(){
+
+     var inc = 0;
     $("#email").blur(function(e){
         var check="val="+$('#email').val()+"&opt=email";
         $.ajax({
@@ -64,7 +66,7 @@ $("document").ready(function(){
         }
 
         if(cat=="Food"){
-            data = '<option>Select Tag</option><option>Non-veg</option><option>Veg</option><option>dot Net</option><option>C Sharp</option><option>Others</option>';
+            data = '<option>Select Tag</option><option>Non-veg</option><option>Veg</option><option>dot Net</option><option>Others</option>';
             $("#tag").html(data);
         
         }
@@ -117,9 +119,17 @@ $("document").ready(function(){
         var cat=$('#tag').val();
         if(cat=="Others")
         {
-          $('#tagop').html('<input type="text" name="tagop" placeholder="Enter Tag">');  
+          $('#tagop').html('<input type="text" name="tagop" placeholder="Enter Tag" required>');  
         }
 
+    });
+    $(".moref").click(function(e){
+       
+        if(inc<20)
+        {
+            inc+=1;
+            $('#more').append('<input type="text" name="tag'+inc+'"   placeholder="Enter Tag" required>')
+        }    
     });
 });
 

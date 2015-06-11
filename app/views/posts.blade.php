@@ -18,7 +18,7 @@
 	@endif
 
 	<div>
-		<div class="header row" style="background-color:#3a5795;color:#fff">
+		<div class="header row" style="background-color:#006666;color:#fff">
 		<div class="col-10" style="">
 			 {{ Session::get('email') }}
 		</div>
@@ -59,6 +59,7 @@
 						<select id="tag" name="tag"></select>
 						
 					</label><label id="tagop"></label>
+					<label id="more"></label><a href="#" class="moref"> Add more tag</a>
 				</div>
 			</div>
 			</br>

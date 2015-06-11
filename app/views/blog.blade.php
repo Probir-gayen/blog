@@ -10,7 +10,7 @@
 
 @section('content')
 
-	<div class="header row" style="background-color:#3a5795;color:#fff">
+	<div class="header row" style="background-color:#006666;color:#fff">
 		<div class="col-10" style="">
 			Welcome {{ Session::get('email') }}
 		</div>
@@ -22,7 +22,7 @@
 		<div style="color:#3a5795;">
 			<h1>Create Your New Blog</h1>
 			<div>
-				<label>Titel</label>
+				<label>Title</label>
 				<label><input type="text" name="title" placeholder="Enter Title"></label>
 			
 				<label>Url</label>

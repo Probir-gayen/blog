@@ -10,7 +10,7 @@
 
 @section('content')
 	
-	<div class="header row" style="background-color:#3a5795;color:#fff">
+	<div class="header row" style="background-color:#006666;color:#fff">
 		<div class="col-5"></div>
 		<div class="col-2" style="margin-bottom:2px;">
 			

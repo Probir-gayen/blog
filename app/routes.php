@@ -41,6 +41,11 @@ Route::get('postProfile', function()
 	return View::make('postProfile');
 });
 
+Route::get('posts/search/{url}', function($url)
+{
+
+	return View::make('search')->with('url',$url);
+});
 
 
 
@@ -64,6 +69,8 @@ Route::post('posts/{url}',array('uses'=>'postsController@postPosts', 'as' => 'po
 
 Route::get('posts/{url}/{bid}',array('uses'=>'PostsController@getPosts', 'as' => 'posts'));
 
+Route::post('posts/search/{url}',array('uses'=>'postsController@postSearch','as' => 'search'));
+
 Route::post('comment/{url}/{pid}',array('uses'=>'commentController@postComment', 'as' => 'comment'));
 
 Route::post('delete/{bid}',array('uses'=>'userController@postDeleteBlog', 'as' => 'delete'));
@@ -73,3 +80,8 @@ Route::post('delete/{url}/{bid}',array('uses'=>'PostsController@postDelete', 'as
 Route::post('deleteCom/{url}/{cid}',array('uses'=>'commentController@postDelete', 'as' => 'deleteCom'));
 
 Route::post('like/{url}/{pid}',array('uses'=>'PostsController@postLike', 'as' => 'like'));
+
+
+
+
+

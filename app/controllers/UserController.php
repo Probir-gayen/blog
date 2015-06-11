@@ -60,9 +60,11 @@ class UserController extends BaseController
 		$pos= Post::where('blog_id','=',$bid)->first();
 		if($pos != null)
 		{
+			$tag= Tag::where('post_id','=',$pos->pid)->delete();
 			$com=Comment::where('post_id','=',$pos->pid)->delete();
 			$like= Like::where('post_id','=',$pos->pid)->delete();
 			$pos= Post::where('pid','=',$pos->pid)->delete();
+
 		}
 		$blog=Blog::where('bid','=',$bid)->delete();
 		

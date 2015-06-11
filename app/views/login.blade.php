@@ -6,7 +6,7 @@
 	@parent
 
 	<title>Blog</title>
-	{{ HTML::script('js/login.js') }}
+	
 
 
 @stop
@@ -18,7 +18,7 @@
 		<div class="alert alert-danger">{{ Session::get('fail') }}</div>
 	@endif
 
-	<p style="background-color:#3a5795; font-size:24px; text-align:center; padding:5px; color:#fff;">Member Login</p>
+	<p style="background-color:#006666; font-size:24px; text-align:center; padding:5px; color:#fff;">Member Login</p>
 	<div id="form" style="padding:0px 10px 10px 10px;">
 	    <form role="form" class="form_box" id="loginform" action="login" method="post">
 	        <div class="form-group">

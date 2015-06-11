@@ -16,7 +16,7 @@
 		<div class="alert alert-danger">{{ Session::get('fail') }}</div>
 	@endif
 
-	<div class="header row" style="background-color:#3a5795;color:#fff">
+	<div class="header row" style="background-color:#006666;color:#fff">
 		<div class="col-10" style="">
 			Welcome {{ Session::get('email') }}
 		</div>

@@ -19,7 +19,7 @@
 
 @section('content')
 
-	<div class="header row" style="background-color:#3a5795;color:#fff;">
+	<div class="header row" style="background-color:#006666;color:#fff;">
 		<div class="col-10" style="">
 			@if(Session::get('email') == $al['email'])
 				Welcome {{ Session::get('email') }}
@@ -44,7 +44,9 @@
 						<p><a href="{{ URL::route('posts',array($al['url'], $al['bid'])) }}" style="color:#333;">New Post</a></p>
 						
 					@endif
-
+					<div>
+						<p><a href="{{ URL::to('posts/search',$al['url'])}}" style="color:#333;">Search</a></p>
+					</div> 
 				</div>
 			<div class="timeline" style="float:left;width:500px">
 				<div class="timelineinside" style="">
@@ -57,12 +59,21 @@
 								Title: <a href=""><lable>{{ $poss->titel }}</lable></a>
 								Description: <lable>{{ $poss->description }}</lable></br>
 								The Category is: <lable>{{ $poss->category }}</lable></br>
-								The Tage is: <lable>{{ $poss->tag }}</lable></br>
-								Created at: <lable>{{ $poss->created_at }} </lable></br>
+								The Tage : <lable>{{ $poss->tag }}</lable>
+								@foreach($tag as $tags)
+									@if($tags['post_id']==$poss['pid'])
+										,{{ $tags['subtag'] }}
+									@endif
+								@endforeach
+								</br>Created at: <lable>{{ $poss->created_at }} </lable></br>
 								Updated at:<lable> {{ $poss->updated_at }} </lable>
 								
 								<div>
-									<span  style="float:left;"><a href="#" class="com" >Comment</a></span>
+									@if(Session::has('email'))
+										<span  style="float:left;"><a href="#" class="com" >Comment</a></span>
+									@else
+										<span style="float:left;">Join Me</span>
+									@endif
 									<span style="float:right;">
 										
 										@if(count($like) > 0)<?php $i=0; ?>
@@ -96,7 +107,7 @@
 												@endforeach
 												@if($j == 1)
 														<div><form action="{{ URL::route('like',array($al['url'], $poss['pid'])) }}" method="post">
-														<button type="submit">LIKES</button>
+														<button type="submit">LIKE</button>
 														</form> </div>
 												@endif
 											@endif	
